@@ -7923,7 +7923,7 @@ namespace Tqdev\PhpCrudApi\Middleware {
                 if ($path == 'login') {
                     $users = $this->db->selectAll($table, $columnNames, $condition, $columnOrdering, 0, 1);
                     foreach ($users as $user) {
-                        if (password_verify($password, $user[$passwordColumnName]) == 1) {
+                        if (md5($password) == $user[$passwordColumnName]) {
                             if (!headers_sent()) {
                                 session_regenerate_id(true);
                             }
